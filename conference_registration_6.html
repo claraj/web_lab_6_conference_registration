@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Conference Registration</title>
+</head>
+<body>
+
+
+
+<!--Name, a text input for the registrant's name, max length 70 characters. Required.-->
+<label for="name">Name:</label>
+  <input id="name" name="name" type="text" maxlength="70">
+
+  <br>
+<!--Password. Use a password input. Required.-->
+  <label for="password">Password:</label>
+  <input type="password" id="password" name="password">
+
+<!--TODO Email, using an email input.  Required.-->
+  <br>
+<!--T-shirt size, either small, medium, or large. (All attendees receive a free t-shirt.) Use select and option elements. Required.-->
+  <label for="shirtSize">T-shirt size:</label>
+  <select name="shirtSize" id="shirtSize">
+    <option disabled selected value=""> Select your t-shirt size </option>  <option>Small</option>
+    <option>Medium</option>
+    <option>Large</option>
+    <option>X-Large</option>
+    <option>2X-Large</option>
+  </select>
+
+<!--TODO Date of birth, a date input element. Required.-->
+<!--TODO Receive email updates? Two radio buttons to select if wanting to receive email from conference sponsors; yes or no. Required. The radio buttons should work as radio buttons, selecting one button should deselect the other.-->
+
+<!--Choose sessions, Two checkbox elements to select if attending the morning, and/or afternoon conference sessions.-->
+  <p>What sessions will you attend?</p>
+  <label for="morning">Morning</label>
+  <input id="morning" type="checkbox">
+  <label for="afternoon">Afternoon</label>
+  <input id="afternoon" type="checkbox">
+
+<!--Special Requests, A textarea (for entering more than one line) any special requests. Set the size to be 7 rows and 70 columns. Not required.-->
+<!--A submit button - input type = submit.-->
+<!--(Note that clicking this button doesn't do anything, but once we have a web server, the submit button could be used to send form data to the server.)-->
+  <br>
+  <button id="submit-registration-button">Submit your registration</button>
+
+
+<script>
+
+  let submitRegistrationButton = document.querySelector('#submit-registration-button')
+  let nameInput = document.querySelector('#name')
+  let passwordInput = document.querySelector('#password')
+  let shirtSizeSelector = document.querySelector('#shirtSize')
+
+  let morningSessionCheckbox = document.querySelector('#morning')
+  let eveningSessionCheckbox = document.querySelector('#evening')
+
+  submitRegistrationButton.addEventListener('click', function(){
+    // this is the code that runs when the button is clicked.
+    // 1. validate form
+    //    Create an array of all the validation errors in the form
+    //    Going through all the inputs, one at a time. if there's a validation error, add message to array
+    //    If there's no issue with an input, do nothing
+    // after checking all the inputs, look at the length of the array
+    // if the array is empty, there were no errors, so the form is good
+    // if the array is not empty, there is at least one validation error
+
+    let errorsArray = []
+
+    let name = nameInput.value
+    console.log(name)
+
+    if (name.length === 0) {   // check if data is INVALID
+      errorsArray.push('Enter your name')
+    }
+
+    // todo check all the other inputs, email, password, date etc.
+
+    let tShirtSize = shirtSizeSelector.value
+    console.log('shirt size selected ' + tShirtSize)
+
+    if (tShirtSize === '') {
+      errorsArray.push('Choose a t-shirt size')
+    }
+
+    // todo checkboxes
+    // todo radio buttons
+
+    console.log(errorsArray)
+
+    if (errorsArray.length === 0) {
+       // what does this mean?
+      alert('Form is complete')
+
+      //1. this will work
+
+      let registration = {
+        name: name,
+        tShirtSize: tShirtSize
+        // todo add other fields
+      }
+
+      console.log(registration)   // real app sends this to a server for processing
+
+    } else {
+      // and what does this mean?
+      // console.log('There was something in the errors array')
+      // console.log('Form validation error(s)')
+      alert('Form error')  // see tree example to display error messages
+
+    }
+
+    //3. can build object here but have to re-check the form is valid
+
+
+    // 2. create a JSON object with the data from the form
+  })
+
+</script>
+
+</body>
+</html>
